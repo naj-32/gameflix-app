@@ -51,6 +51,7 @@ My tests included:
 •	Accessing the profile with an altered token returning 401 Unauthorized.
 I also used MySQL Workbench to confirm that registered users were saved in the database and their passwords were stored as bcrypt hashes instead of plaintext.
 The exported Postman collection and screenshots of the test results are included with my submission.
+
 Changes From Module 3
 In Module 3, I planned GameFlix around separate services for user accounts, the game catalog, and subscriptions. For this assignment, I focused on implementing the User Service rather than building the entire system at once.
 I also reused my existing demo40 MySQL database instead of creating a new database for GameFlix. The user authentication service uses a separate users table, and the other planned features will be implemented in later stages of the project.
