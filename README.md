@@ -58,3 +58,23 @@ I also reused my existing demo40 MySQL database instead of creating a new databa
 
 AI Assistance
 I used Gemini throughout parts of the assignment to help with writing and understanding the Spring Boot code. For example, it helped me set up the registration and login endpoints and explained how JWT authentication works. I also used it to troubleshoot errors during testing. One change I made was updating the security configuration after my invalid registration test returned 401 Unauthorized instead of 400 Bad Request. After making the change, I tested it again in Postman and got the correct response.
+
+Module 5 – Docker Setup
+
+For this assignment, I used Docker to run my GameFlix Spring Boot backend and MySQL database in separate containers. Docker Compose connects the application to the database and makes it easier to run both services together.
+
+How to Run GameFlix with Docker
+1	Install and open Docker Desktop.
+2	Create a .env file using the required database and JWT environment variables. This file is excluded from GitHub for security.
+3	Open the project in IntelliJ and run: ./mvnw clean package -DskipTests
+4	docker compose config --quiet
+5	docker compose up --build -d
+6	Check that both containers are running: docker compose ps
+7	Test the registration endpoint in Postman: POST http://localhost:8080/api/auth/register
+8	Verify the registered user in the Docker MySQL database.
+
+To stop the containers, run:
+docker compose down
+
+Testing Results
+I successfully built the Spring Boot JAR and Docker image. Both the application and MySQL containers ran successfully, and MySQL showed a healthy status. I also tested the registration endpoint in Postman and received a 201 Created response.
