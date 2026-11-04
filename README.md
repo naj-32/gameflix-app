@@ -78,3 +78,5 @@ docker compose down
 
 Testing Results
 I successfully built the Spring Boot JAR and Docker image. Both the application and MySQL containers ran successfully, and MySQL showed a healthy status. I also tested the registration endpoint in Postman and received a 201 Created response.
+AI Assistance
+I used Gemini to help troubleshoot issues I had connecting MySQL to Docker due to password discrepancies. It helped me identify the connection errors and figure out to resolve them. 
