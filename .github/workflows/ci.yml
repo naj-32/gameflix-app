@@ -11,6 +11,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: rootpass
+          MYSQL_DATABASE: demo40
+          MYSQL_USER: testuser
+          MYSQL_PASSWORD: testpass
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    env:
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/demo40
+      SPRING_DATASOURCE_USERNAME: testuser
+      SPRING_DATASOURCE_PASSWORD: testpass
+      JWT_SECRET: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,8 +43,8 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Build with Maven
-        run: mvn clean package -DskipTests
+      - name: Build and run tests
+        run: mvn clean package
 
       - name: Build Docker image
         run: docker build -t gameflix-backend .
