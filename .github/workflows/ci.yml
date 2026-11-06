@@ -48,3 +48,19 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t gameflix-backend .
+
+      - name: Generate CycloneDX SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          image: gameflix-backend:latest
+          format: cyclonedx-json
+          output-file: gameflix-sbom.json
+          artifact-name: gameflix-sbom
+
+      - name: Scan for CRITICAL vulnerabilities
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: gameflix-backend:latest
+          format: table
+          severity: CRITICAL
+          exit-code: '1'
